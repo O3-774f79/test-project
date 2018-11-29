@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-export default class PrivateLayout extends Component {
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import {test} from '../../user/UserActions'
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    input: {
+      display: 'none',
+    },
+  });
+  
+class PrivateLayout extends Component {
     render() {
         const Component = this.props.component;
-        const route = this.props.route;
-        const user = this.props.user;
-        const userActions = this.props.userActions;
+        const { route, user, userActions} = this.props
         return (
-            <div>
+            <Grid container spacing={24}>
+            <Grid item xs={4} md={2} lg={2} style={{backgroundColor:"red"}}>
                 <h1>Private Layout</h1>
                 <h2>Hello {user.name}</h2>
                 <ul>
@@ -17,8 +29,15 @@ export default class PrivateLayout extends Component {
                     <li><Link to='/profile/posts'>Posts</Link></li>
                 </ul>
                 <button onClick={() => {userActions.logout()}}>Logout</button>
+            </Grid>
+            <Grid item xs={8} md={10} lg={10} style={{backgroundColor:"green"}}>
                 <Component route={route}/>
-            </div>
+                <Button variant="contained" color="primary" className={this.props.classes.button} onClick={() => this.props.dispatch(test())}>
+        Primary
+      </Button>
+            </Grid>
+            </Grid>
         );
     }
 }
+export default withStyles(styles)(PrivateLayout)

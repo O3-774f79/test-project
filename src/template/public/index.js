@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default class PublicLayout extends Component {
     render() {
         const Component = this.props.component;
-        const route = this.props.route;
-        const user  = this.props.user;
+        const {route,user} = this.props
+        console.log(this.props)
         return (
             <div>
                 <h1>Public Layout</h1>

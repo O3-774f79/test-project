@@ -1,4 +1,4 @@
-import { USER } from './UserActions';
+import * as c from './Type'
 
 const userDefault = {
     name:'John Doe',
@@ -6,20 +6,23 @@ const userDefault = {
     verified: false
 }
 
-export default function(state = userDefault, action) {
+export default function mainReducer(state = userDefault, action) {
     var user = Object.assign({}, state);
     switch (action.type) {
-        case USER.login.success:
-        case USER.verify.success:
+        case c.USER.login.success:
+        case c.USER.verify.success:
             user.verified = true;
             user.logged = true;
             return user;
-        case USER.logout.success:
+
+        case c.USER.logout.success:
             user.logged = false;
             return user;
-        case USER.verify.error:
+        case c.USER.verify.error:
             user.verified = true;
             return user;
+        case c.USER.test:
+            return [...state, user.name=action.playload.name]
         default:
             return user;
     }

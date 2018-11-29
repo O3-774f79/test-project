@@ -1,15 +1,4 @@
-export const USER = {
-    login: {
-        success: 'USER_LOGIN_SUCCESS',
-    },
-    logout: {
-        success: 'USER_LOGOUT_SUCCESS',
-    },
-    verify: {
-        success: 'USER_VERIFY_SUCCESS',
-        error: 'USER_VERIFY_ERROR',
-    }
-};
+import * as c from './Type'
 
 export class UserActions {
     constructor(dispatch) {
@@ -21,17 +10,26 @@ export class UserActions {
     }
     login() {
         localStorage.setItem(this.userToken, true);
-        return this.dispatch({type: USER.login.success});
+        return this.dispatch({type: c.USER.login.success});
     }
     logout() {
         localStorage.removeItem(this.userToken);
-        return this.dispatch({type: USER.logout.success});
+        return this.dispatch({type: c.USER.logout.success});
     }
     verify() {
         const user = localStorage.getItem(this.userToken);
         if (user) {
-            return this.dispatch({type: USER.verify.success});
+            return this.dispatch({type: c.USER.verify.success});
         }
-        return this.dispatch({type: USER.verify.error});
+        return this.dispatch({type: c.USER.verify.error});
     }
+
+}
+export const test = () => {
+    return {
+        type: c.USER.test,
+        payload: {
+            name: "moo"
+        }
+      }
 }
